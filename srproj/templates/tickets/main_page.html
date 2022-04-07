@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+    {#    <a href="{% url 'show request' %}">Show requests</a>#}
+    {#    <a href="{% url 'create ticket' %}">Create Service Request</a>#}
+    {#    <a href="{% url 'report event log' tid %}">PDF</a>#}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Active Service Requests</label>
+        <div class="form-group">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Summary</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Severity</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Created on</th>
+                    <th scope="col">Due resolution</th>
+                    <th scope="col">Assigned to</th>
+                    <th scope="col">Remark</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in tickets %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'ticket details' item.pk%}">{{ forloop.counter }}</a>
+                        <td>{{ item.summary }}</td>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.severity }}</td>
+                        <td>{{ item.state }}</td>
+                        <td>{{ item.register_date|date:"D, d M Y G:i" }}</td>
+                        <td>{{ item.resolve_due_date|date:"D, d M Y G:i" }}</td>
+                        {% if item.assignee %}
+                            <td>{{ item.assignee }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        {% if item.is_delayed %}
+                            <td style="color:red">Delayed</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {#    <a href="{% url 'request details' %}">Service request details</a>#}
+    {#{% if request.user.is_authenticated %}#}
+    {#    <a href="{% url 'logout user' %}">Logout</a>#}
+    {#    <a href="{% url 'profile' request.user.pk %}">Profile</a>#}
+    {##}
+    {#{% else %}#}
+    {#    <a href="{% url 'register user' %}">Register</a>#}
+    {#    <a href="{% url 'login user' %}">Login</a>#}
+    {#{% endif %}#}
+    {#<div>#}
+    {#    <a href="{% url 'restricted' %}">Go to restricted</a>#}
+    {#</div>#}
+
+    {#<h1>#}
+    {#    {{ request.user }}#}
+    {#</h1>#}
+
+{% endblock %}

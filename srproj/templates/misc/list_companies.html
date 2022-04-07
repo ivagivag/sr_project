@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Company Contracts</label>
+        <div class="form-group">
+            <table class="table table-striped">
+                <thead>
+                <tr class="table-secondary">
+                    <th scope="col">Contract Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Valid To</th>
+                    <th scope="col">Active Subscription</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in object_list %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'display company' item.pk %}">{{ item.contract_number }}</a>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.valid_to }}</td>
+                        <td>{{ item.is_active }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

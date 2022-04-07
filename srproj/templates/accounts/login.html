@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, provide your username and password</label>
+        <div class="form-group">
+{#            <form class="form-control" action="{% url 'login user' %}?next={{ next }}" method="post">#}
+            <form class="form-control" action="{% url 'login user' %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Login</button>
+            </form>
+        </div>
+    </div>
+
+{#    <div class="mb-3">#}
+{#        <form action="{% url 'login user' %}?next={{ next }}" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <button type="button" class="btn btn-success">Login</button>#}
+{#        </form>#}
+{#    </div>#}
+{% endblock %}
+

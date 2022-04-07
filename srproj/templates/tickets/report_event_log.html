@@ -1,0 +1,23 @@
+<div class="container">
+    <label class="col-sm-4 col-form-label">Ticket Event Log:</label>
+    <div class="form-group">
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th scope="col">Event Time</th>
+                <th scope="col">Creator</th>
+                <th scope="col">Event</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in log_events %}
+                <tr>
+                    <td>{{ item.event_time|date:"D, d M Y G:i" }}</td>
+                    <td>{{ item.creator }}</td>
+                    <td>{{ item.event }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

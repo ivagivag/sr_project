@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, assign the service request to a support engineer</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'assign ticket' object.pk %}">
+{#            <form class="form-control" method="post">#}
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-primary">Assign</button>
+                <button type="button" class="btn btn-light" onclick="location.href='{% url 'ticket details' object.pk %}'">Cancel</button>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

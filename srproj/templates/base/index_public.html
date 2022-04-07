@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <label class="col-sm-7 col-form-label"><h2>Welcome to the support site of SiraTel Company!</h2></label>
+        <div>
+            <br><br>
+            <h4>
+                We do our best to provide the highest quality of our
+                software products, but we are here as well to support you in situations of trouble and disturbed
+                functionalities.
+            </h4><br>
+            <h4>
+                Also, you can address our engineers regarding technical questions and configuration issues.
+                We work 24 hours a day 7 days a week to be fully at your disposal and provide you the best possible care
+                of our products.
+            </h4><br>
+            <h4>
+                Regarding the tight reaction times, we highly recommend raising service requests with critical severity
+                by phone in order to assure a reliable communication channel.
+            </h4><br>
+            <h4>
+                If you don’t have a support contract yet, or it has been expired, please contact our
+                <a href="{% url 'contacts' %}">Support Contracts</a>
+                department for further details.
+            </h4><br>
+            <h4>
+                You may also need to visit our <a href="{% url 'faq' %}">FAQs</a> page.
+            </h4><br>
+            <h4>
+                Please, feel free to contact us at any time should you have further questions or doubts.
+            </h4>
+        </div>
+    </div>
+
+{% endblock %}

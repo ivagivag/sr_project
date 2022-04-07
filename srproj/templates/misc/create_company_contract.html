@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, fill in the company contract data</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'create company' %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-light" onclick="location.href='{% url 'list companies' %}'">Close</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

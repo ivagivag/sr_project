@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <h2>Customer Verification</h2>
+    </div>
+
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, provide the Contract Number for your company</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'verify company' %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

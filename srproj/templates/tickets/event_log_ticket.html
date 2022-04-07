@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Ticket Event Log</label>
+        <a href="{% url 'ticket details' tid %}"><img class="img_size"
+                                                      src="{% static 'images/back_64.png' %}"
+                                                      title="Back to SR details"
+                                                      alt="Back"></a>
+        <a href="{% url 'report event log' tid %}"><img class="img_size"
+                                                        src="{% static 'images/pdf_48.png' %}"
+                                                        title="Save to PDF"
+                                                        alt="PDF"></a>
+        <div class="form-group">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Event Time</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col">Event</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in log_events %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{ item.event_time|date:"D, d M Y G:i" }}</td>
+                        <td>{{ item.creator }}</td>
+                        <td>{{ item.event }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

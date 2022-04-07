@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+{% load verify_perm %}
+
+{% block content %}
+{#    <meta http-equiv="refresh" content="30"/>#}
+
+    {% if not tickets %}
+        <div class="text-center">
+            <h4>NO {{ category }} Service Requests to Display</h4>
+        </div>
+    {% else %}
+        <div class="container">
+            <label class="col-sm-4 col-form-label">{{ category }} Service Requests</label>
+            <div class="form-group">
+                <table class="table table-striped" id="sr">
+                    <thead>
+                    <tr class="table-info">
+                        <th scope="col">Service Request</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Severity</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Due resolution</th>
+                        <th scope="col">Assigned to</th>
+                        {% if not user|has_group:"Customer" %}
+                            <th scope="col">Remark</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in tickets %}
+                        <tr>
+                            <th scope="row"><a href="{% url 'ticket details' item.pk %}">SR#{{ item.pk }}</a>
+                            <td>{{ item.summary }}</td>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.product }}</td>
+                            <td>{{ item.severity }}</td>
+                            <td>{{ item.state }}</td>
+                            <td>{{ item.register_date|date:"D, d M Y G:i" }}</td>
+                            <td>{{ item.resolve_due_date|date:"D, d M Y G:i" }}</td>
+                            {% if item.assignee %}
+                                <td>{{ item.assignee }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            {% if not user|has_group:"Customer" %}
+                                {% if item.is_delayed %}
+                                    <td style="color:red">Delayed</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&laquo;</a></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                                    href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

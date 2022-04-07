@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, modify the company contract data</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'modify company' object.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

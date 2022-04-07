@@ -1,0 +1,81 @@
+{% extends 'base/base.html' %}
+{% load time_filters %}
+{% block content %}
+{#    <meta http-equiv="refresh" content="30"/>#}
+
+    <div class="container">
+        {% if not sla_violated %}
+            <div class="text-center">
+                <h4>NO Violated SLA of Service Requests</h4>
+            </div>
+        {% else %}
+            <label class="col-sm-4 col-form-label">Violated SLA of Service Requests</label>
+            <div class="form-group">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Customer</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Severity</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Is Active</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Due Resolution/Resolved</th>
+                        <th scope="col">Delay</th>
+                        <th scope="col">Service Request</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in sla_violated %}
+                        <tr>
+                            <td>{{ item.creator.company.name }}</td>
+                            <td>{{ item.product }}</td>
+                            <td>{{ item.severity }}</td>
+                            <td>{{ item.state }}</td>
+                            <td>{{ item.is_active }}</td>
+                            <td>{{ item.register_date|date:"D, d M Y G:i" }}</td>
+                            {% if item.is_active %}
+                                <td>{{ item.resolve_due_date|date:"D, d M Y G:i" }}</td>
+                            {% else %}
+                                <td>{{ item.resolve_date|date:"D, d M Y G:i" }}</td>
+                            {% endif %}
+                            <td style="color: #b02a37">{{ item.delay|hr_timedelta }}</td>
+                            <td><a href="{% url 'ticket details' item.id %}">SR#{{ item.id }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&laquo;</a></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                                    href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

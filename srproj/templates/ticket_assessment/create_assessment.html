@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-6 col-form-label">Please, evaluate the support regarding the following service request:</label>
+
+        <div class="form-group">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>Summary:</td>
+                    <td>{{ ticket.summary }}</td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td>Product:</td>
+                    <td>{{ ticket.product }}</td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td>Created by:</td>
+                    <td>{{ ticket.creator }}</td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td>Created on:</td>
+                    <td>{{ ticket.register_date }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="form-control" method="post" action="{% url 'assess ticket' tid %}">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-light" onclick="location.href='{% url 'ticket details' tid %}'">No, thanks!</button>
+                </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-10 col-form-label" style="color:red">CAUTION: Once you close the service request it becomes inactive,
+            and no one can any longer work on it</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'close ticket' object.pk %}">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Summary:</td>
+                        <td>{{ object.summary }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Product:</td>
+                        <td>{{ object.product }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Created by:</td>
+                        <td>{{ object.creator }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Created on:</td>
+                        <td>{{ object.register_date }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-danger">Close SR</button>
+                <button type="button" class="btn btn-light" onclick="location.href='{% url 'ticket details' object.pk %}'">Cancel</button>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

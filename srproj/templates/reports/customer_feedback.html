@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{#    <meta http-equiv="refresh" content="30"/>#}
+
+    {% if not assessments %}
+        <div class="text-center">
+            <h4>NO data to display</h4>
+        </div>
+    {% else %}
+        <div class="container">
+            <label class="col-sm-4 col-form-label">{{ fb | capfirst }} Customer Feedback</label>
+            <div class="form-group">
+                <table class="table table-striped">
+                    <thead>
+                    {% if fb|lower == "negative" %}
+                        <tr class="table-danger">
+                            {% else %}
+                        <tr class="table-success">
+                    {% endif %}
+                    <th scope="col">Evaluate Reaction</th>
+                    <th scope="col">Reaction Notes</th>
+                    <th scope="col">Evaluate SR Resolution</th>
+                    <th scope="col">Resolution Notes</th>
+                    <th scope="col">Overall Satisfaction</th>
+                    <th scope="col">Satisfaction Notes</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Valuer</th>
+                    <th scope="col">Service Request</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for assessment in assessments %}
+                        <tr>
+                            <td>{{ assessment.reaction }}</td>
+                            <td>{{ assessment.reaction_remark }}</td>
+                            <td>{{ assessment.resolve }}</td>
+                            <td>{{ assessment.resolve_remark }}</td>
+                            <td>{{ assessment.overall }}</td>
+                            <td>{{ assessment.roverall_remark }}</td>
+                            <td>{{ assessment.event_time|date:"D, d M Y G:i" }}</td>
+                            <td>{{ assessment.creator }}</td>
+                            <td>
+                                <a href="{% url 'ticket details' assessment.ticket_id %}">SR#{{ assessment.ticket_id }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&laquo;</a></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                                    href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                                              aria-disabled="true">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

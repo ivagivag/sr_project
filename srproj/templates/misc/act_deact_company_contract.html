@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <label class="col-sm-4 col-form-label">Please, confirm the action: {{ action | capfirst }}</label>
+
+        <div class="form-group">
+            <form class="form-control" method="post" action="{% url 'act deact company' action object.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                {% if action|lower == "activate" %}
+                    <button type="submit" class="btn btn-success">{{ action | capfirst }}</button>
+                {% else %}
+                    <button type="submit" class="btn btn-danger">{{ action | capfirst }}</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

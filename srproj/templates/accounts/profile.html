@@ -1,0 +1,30 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        {% if profile.first_name and profile.last_name and profile.phone %}
+            <label class="col-sm-4 col-form-label">Your profile:</label>
+        {% else %}
+            <label class="col-sm-4 col-form-label">Please, complete your profile:</label>
+        {% endif %}
+        <div class="form-group">
+
+            <form method="post" action="{% url 'user profile' profile.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-light" onclick="location.href='{% url 'main page' %}'">Close</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
