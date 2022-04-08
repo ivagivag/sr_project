@@ -6,28 +6,23 @@ from django.test import TestCase
 from django.urls import reverse
 
 from srproj.accounts.models import Company
-from srproj.tickets.models.suppl_models import ProductFamily, Product
 
 UserModel = get_user_model()
 
 
-class CompanyCreateViewTest(TestCase):
+class CompanyModifyViewTest(TestCase):
     company_customer_data = {
         'name': 'ChinaTel',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '222',
+        'contract_number': '222222',
     }
     company_internal_data = {
         'name': 'internal',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '000',
+        'contract_number': '000000',
     }
     user_customer1_data = {
         'email': 'z@x.com',
-        'password': '123',
-    }
-    user_customer2_data = {
-        'email': 'c@v.com',
         'password': '123',
     }
     user_support_data = {
@@ -45,20 +40,15 @@ class CompanyCreateViewTest(TestCase):
         'password': '123',
         'is_external': False,
     }
-    current_time = datetime.datetime.now()
-    reaction_hours = 2
-    customer_group = Group.objects.get(name='Customer')
 
     def setUp(self):
         company_customer = Company.objects.create(**self.company_customer_data)
         company_internal = Company.objects.create(**self.company_internal_data)
         self.user_customer1_data.update({'company': company_customer})
-        self.user_customer2_data.update({'company': company_customer})
         self.user_support_data.update({'company': company_internal})
         self.user_supervisor_data.update({'company': company_internal})
         self.user_care_data.update({'company': company_internal})
         user_customer1 = UserModel.objects.create_user(**self.user_customer1_data)
-        user_customer2 = UserModel.objects.create_user(**self.user_customer2_data)
         user_support = UserModel.objects.create_user(**self.user_support_data)
         user_supervisor = UserModel.objects.create_user(**self.user_supervisor_data)
         user_care = UserModel.objects.create_user(**self.user_care_data)
@@ -67,39 +57,36 @@ class CompanyCreateViewTest(TestCase):
         group_supervisor = Group.objects.create(name="Supervisor")
         group_care = Group.objects.create(name="Care")
         group_customer.user_set.add(user_customer1)
-        group_customer.user_set.add(user_customer2)
         group_support.user_set.add(user_support)
         group_supervisor.user_set.add(user_supervisor)
         group_care.user_set.add(user_care)
-        self.action = 'create ticket'
+        self.kw_client = {'pk': company_customer.id}
+        self.action = 'modify company'
 
-    def test_support_can_not_create_ticket(self):
+    def test_support_can_not_modify_company_contract(self):
         self.client.login(**self.user_support_data)
-        response = self.client.get(reverse(self.action))
+        response = self.client.get(reverse(self.action, kwargs=self.kw_client))
         self.assertEqual(response.status_code, 403)
+        self.assertTemplateUsed(response, 'base/403.html')
 
-    def test_care_can_not_create_ticket(self):
+    def test_care_can_not_modify_company_contract(self):
         self.client.login(**self.user_care_data)
-        response = self.client.get(reverse(self.action))
+        response = self.client.get(reverse(self.action, kwargs=self.kw_client))
         self.assertEqual(response.status_code, 403)
+        self.assertTemplateUsed(response, 'base/403.html')
 
-    def test_create_ticket_form_fields_required(self):
+    def test_customer_can_not_modify_company_contract(self):
         self.client.login(**self.user_customer1_data)
-        response = self.client.post(reverse(self.action))
-        for field in ('summary', 'description', 'product', 'severity'):
-            self.assertFormError(response, 'form', field, 'This field is required.')
+        response = self.client.get(reverse(self.action, kwargs=self.kw_client))
+        self.assertEqual(response.status_code, 403)
+        self.assertTemplateUsed(response, 'base/403.html')
 
-    def test_customer_can_create_ticket(self):
-        self.client.login(**self.user_customer1_data)
-        response = self.client.get(reverse(self.action))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'tickets/create_ticket.html')
-
-    def test_supervisor_can_create_ticket(self):
+    def test_supervisor_can_modify_company_contract(self):
         self.client.login(**self.user_supervisor_data)
-        response = self.client.get(reverse(self.action))
+        response = self.client.get(reverse(self.action, kwargs=self.kw_client))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'misc/modify_company_contract.html')
 
     def test_user_not_logged_in_is_redirected_at_home(self):
-        response = self.client.get(reverse(self.action))
+        response = self.client.get(reverse(self.action, kwargs=self.kw_client))
         self.assertRedirects(response, '/')

@@ -26,12 +26,12 @@ class TicketResolvedListViewTest(TestCase):
     company_customer_data = {
         'name': 'ChinaTel',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '222',
+        'contract_number': '222222',
     }
     company_internal_data = {
         'name': 'internal',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '000',
+        'contract_number': '000000',
     }
     user_customer1_data = {
         'email': 'z@x.com',

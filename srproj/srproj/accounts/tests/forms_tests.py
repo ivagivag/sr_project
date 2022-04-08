@@ -12,38 +12,38 @@ class UserRegistrationFormTest(TestCase):
     }
 
     def test_user_provided_invalid_company_contract(self):
-        self.company_data['contract_number'] = '888'
+        self.company_data['contract_number'] = '888888'
         self.company_data['is_active'] = True
         Company.objects.create(**self.company_data)
 
-        form = UserRegistrationForm(data={'service_contract': '799'})
+        form = UserRegistrationForm(data={'service_contract': '799799'})
         self.assertEqual(
             form.errors['service_contract'], ['Invalid Service Contract']
         )
 
     def test_user_provided_company_contract_expired(self):
-        self.company_data['contract_number'] = '888'
+        self.company_data['contract_number'] = '888888'
         self.company_data['is_active'] = False
         Company.objects.create(**self.company_data)
 
-        form = UserRegistrationForm(data={'service_contract': '888'})
+        form = UserRegistrationForm(data={'service_contract': '888888'})
         self.assertEqual(
             form.errors['service_contract'], ['Company Access Restricted']
         )
 
     def test_user_provided_internal_company_contract_not_allowed(self):
-        self.company_data['contract_number'] = '000'
+        self.company_data['contract_number'] = '000000'
         self.company_data['is_active'] = True
         Company.objects.create(**self.company_data)
 
-        form = UserRegistrationForm(data={'service_contract': '000'})
+        form = UserRegistrationForm(data={'service_contract': '000000'})
         self.assertEqual(
             form.errors['service_contract'], ['Registration for Customers Only']
     )
 
     def test_user_provided_company_correct_data(self):
-        self.company_data['contract_number'] = '888'
+        self.company_data['contract_number'] = '888888'
         self.company_data['is_active'] = True
         Company.objects.create(**self.company_data)
-        form = UserRegistrationForm(data={'service_contract': '888'})
+        form = UserRegistrationForm(data={'service_contract': '888888'})
         self.assertNotIn('service_contract', form.errors)

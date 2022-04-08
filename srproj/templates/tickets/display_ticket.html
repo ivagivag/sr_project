@@ -14,7 +14,7 @@
             {% if user|has_group:"Customer" or user|has_group:"Support" or user|has_group:"Supervisor" %}
 
                 <a href="{% url 'modify ticket' item.pk %}"><img class="img_size"
-                                                                 src="{% static 'images/new/compose_48.png' %}"
+                                                                 src="{% static 'images/compose_48.png' %}"
                                                                  title="Modify"
                                                                  alt="Modify"></a>
 
