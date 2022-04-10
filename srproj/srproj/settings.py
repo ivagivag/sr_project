@@ -100,11 +100,15 @@ if APP_ENV == 'Prod':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'd7885iavjhilgr',
-            'USER': 'hpigsfyoyrdevu',
-            'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
-            'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
-            'PORT': '5432',
+            # 'NAME': 'd7885iavjhilgr',
+            'NAME': os.getenv('DB_NAME'),
+            # 'USER': 'hpigsfyoyrdevu',
+            'USER': os.getenv('DB_USER'),
+            # 'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            # 'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 elif APP_ENV == 'Dev':
