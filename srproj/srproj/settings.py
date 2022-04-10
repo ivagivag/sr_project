@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7x(7=lyxch@6h=bme=g_edq5u%0ltezsjkd+rp+mv=zsmb1c^d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com']
 
 
 # Application definition
@@ -86,13 +86,24 @@ WSGI_APPLICATION = 'srproj.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'srprojdb',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'srprojdb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'd7885iavjhilgr',
+        'USER': 'hpigsfyoyrdevu',
+        'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
+        'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
