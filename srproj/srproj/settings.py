@@ -19,12 +19,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7x(7=lyxch@6h=bme=g_edq5u%0ltezsjkd+rp+mv=zsmb1c^d'
+# SECRET_KEY = 'django-insecure-7x(7=lyxch@6h=bme=g_edq5u%0ltezsjkd+rp+mv=zsmb1c^d'
+SECRET_KEY = os.getenv('SECRET_KEY')
+print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
+DEBUG = os.getenv('DEBUG')
+print(DEBUG)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tech-service-request-app.herokuapp.com']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tech-service-request-app.herokuapp.com']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
+APP_ENV = os.getenv('APP_ENV')
+print(APP_ENV)
 
 # Application definition
 
@@ -79,13 +86,6 @@ WSGI_APPLICATION = 'srproj.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'srprojdb',
 #         'USER': 'postgres',
@@ -94,36 +94,47 @@ WSGI_APPLICATION = 'srproj.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
+DATABASES = {}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7885iavjhilgr',
-        'USER': 'hpigsfyoyrdevu',
-        'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
-        'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+if APP_ENV == 'Prod':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd7885iavjhilgr',
+            'USER': 'hpigsfyoyrdevu',
+            'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
+            'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
-
+elif APP_ENV == 'Dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+print(DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
+if APP_ENV == 'Prod':
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        },
+    ]
+else:
+    AUTH_PASSWORD_VALIDATORS = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
