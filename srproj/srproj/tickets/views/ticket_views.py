@@ -16,14 +16,14 @@ from srproj.common.view_mixins import VerifyPermissionMixin, \
 UserModel = get_user_model()
 
 
-def display_main_page(request):
-    """
-    Different main pages are displayed based on the fact whether the user has been authenticated or not
-    """
-    if request.user.is_authenticated:
-        return render(request, 'base/index_private.html')
-    else:
-        return render(request, 'base/index_public.html')
+# def display_main_page(request):
+#     """
+#     Different main pages are displayed based on the fact whether the user has been authenticated or not
+#     """
+#     if request.user.is_authenticated:
+#         return render(request, 'base/index_private.html')
+#     else:
+#         return render(request, 'base/index_public.html')
 
 
 class TicketCreateView(CustomLoginRequiredMixin, VerifyPermissionRestrictMixin, views.CreateView):
@@ -195,19 +195,19 @@ class TicketResolvedView(TicketListView):
     active = False
 
 
-def resource_not_found(request, exception, template_name='base/404.html'):
-    """
-    Custom 404 NotFound page
-    The status code must be passed on to render, otherwise status code 200 is returned,
-    which compromises the Unit tests
-    """
-    return render(request, template_name, status=404)
-
-
-def forbidden(request, exception, template_name='base/403.html', status_code=403):
-    """
-    Custom 403 Forbidden page
-    The status code must be passed on to render, otherwise status code 200 is returned,
-    which compromises the Unit tests
-    """
-    return render(request, template_name, status=403)
+# def resource_not_found(request, exception, template_name='base/404.html'):
+#     """
+#     Custom 404 NotFound page
+#     The status code must be passed on to render, otherwise status code 200 is returned,
+#     which compromises the Unit tests
+#     """
+#     return render(request, template_name, status=404)
+#
+#
+# def forbidden(request, exception, template_name='base/403.html', status_code=403):
+#     """
+#     Custom 403 Forbidden page
+#     The status code must be passed on to render, otherwise status code 200 is returned,
+#     which compromises the Unit tests
+#     """
+#     return render(request, template_name, status=403)
