@@ -18,7 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
     fieldsets = (
         ("Basic", {
-            'fields': ('name', 'family', 'features', 'version',)
+            'fields': ('name', 'family', 'features', 'version', 'stability',)
         }),
         ("Validity", {
             'fields': ('date_of_release', 'end_of_support', 'is_active',)
@@ -26,7 +26,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
     add_fieldsets = (
         ("Basic", {
-            'fields': ('name', 'family', 'features', 'version',)
+            'fields': ('name', 'family', 'features', 'version', 'stability',)
         }),
         ("Validity", {
             'fields': ('date_of_release', 'end_of_support', 'is_active',)
