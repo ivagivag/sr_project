@@ -48,7 +48,7 @@
                                                      alt="Event Log"></a>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <label class="col-sm-4 col-form-label">Service Request Details</label>
         <div class="form-group">
             <table class="table">
@@ -119,7 +119,7 @@
         </div>
     </div>
     {% if assessments %}
-        <div class="container">
+        <div class="container-fluid">
             <label class="col-sm-4 col-form-label">Service Request Feedback</label>
             <div class="form-group">
                 {% if assessments.count > 1 %}
@@ -147,7 +147,7 @@
                         <td>{{ assessment.resolve }}</td>
                         <td>{{ assessment.resolve_remark }}</td>
                         <td>{{ assessment.overall }}</td>
-                        <td>{{ assessment.roverall_remark }}</td>
+                        <td>{{ assessment.overall_remark }}</td>
                         <td>{{ assessment.event_time|date:"D, d M Y G:i" }}</td>
                         <td>{{ assessment.creator }}</td>
                     </tr>
@@ -159,7 +159,7 @@
     {% endif %}
 
     {% if entries %}
-        <div class="container">
+        <div class="container-fluid">
             <label class="col-sm-4 col-form-label">Ticket Entries</label>
             <div class="form-group">
                 {% if entries.count > 1 %}
