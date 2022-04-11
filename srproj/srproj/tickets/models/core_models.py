@@ -122,7 +122,7 @@ class TicketEventLog(models.Model):
         Ticket,
         on_delete=models.CASCADE,
     )
-    event = models.CharField(max_length=300,)
+    event = models.TextField()
     creator = models.ForeignKey(
         UserModel,
         on_delete=models.RESTRICT,
