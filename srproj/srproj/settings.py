@@ -20,7 +20,7 @@ DEBUG = False
 APP_ENV = os.getenv('APP_ENV')
 
 if APP_ENV == 'Prod':
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
+    ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 else:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
