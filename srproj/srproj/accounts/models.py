@@ -42,6 +42,8 @@ class Account(AbstractBaseUser, PermissionsMixin):
     company = models.ForeignKey(
         Company,
         on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
     )
 
     objects = AccountManager()
