@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'srproj.tickets',
     'srproj.reports',
     'srproj.miscellaneous',
-    'srproj.main',
 ]
 
 MIDDLEWARE = [
