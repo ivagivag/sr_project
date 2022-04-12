@@ -140,7 +140,7 @@ class TicketAssessment(models.Model):
     GOOD = "Good"
     VERY_GOOD = "Very Good"
     EXCELLENT = "Excellent"
-    CHOICES = [(x, x) for x in (EXCELLENT, VERY_GOOD, GOOD, POOR, FAIR)]
+    CHOICES = [(x, x) for x in (EXCELLENT, VERY_GOOD, GOOD, FAIR, POOR)]
     CHOICE_MAX_LEN = max([len(y) for (x, y) in CHOICES])
     NEGATIVE_CHOICES = (POOR, FAIR)
     POSITIVE_CHOICES = (GOOD, VERY_GOOD, EXCELLENT)

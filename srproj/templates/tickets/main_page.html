@@ -2,9 +2,6 @@
 
 {% block content %}
 
-    {#    <a href="{% url 'show request' %}">Show requests</a>#}
-    {#    <a href="{% url 'create ticket' %}">Create Service Request</a>#}
-    {#    <a href="{% url 'report event log' tid %}">PDF</a>#}
     <div class="container">
         <label class="col-sm-4 col-form-label">Active Service Requests</label>
         <div class="form-group">
@@ -48,22 +45,5 @@
             </table>
         </div>
     </div>
-
-    {#    <a href="{% url 'request details' %}">Service request details</a>#}
-    {#{% if request.user.is_authenticated %}#}
-    {#    <a href="{% url 'logout user' %}">Logout</a>#}
-    {#    <a href="{% url 'profile' request.user.pk %}">Profile</a>#}
-    {##}
-    {#{% else %}#}
-    {#    <a href="{% url 'register user' %}">Register</a>#}
-    {#    <a href="{% url 'login user' %}">Login</a>#}
-    {#{% endif %}#}
-    {#<div>#}
-    {#    <a href="{% url 'restricted' %}">Go to restricted</a>#}
-    {#</div>#}
-
-    {#<h1>#}
-    {#    {{ request.user }}#}
-    {#</h1>#}
 
 {% endblock %}

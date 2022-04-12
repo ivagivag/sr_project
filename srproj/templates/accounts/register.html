@@ -2,24 +2,10 @@
 {% load static %}
 {% block content %}
 
-{#    <br>#}
-{#    <div class="container">#}
-{#        <div class="card" style="width: 18rem;">#}
-{#            <div class="card-header">Customer Details</div>#}
-{#            <ul class="list-group list-group-flush">#}
-{#                <li class="list-group-item">Company name: {{ name }}</li>#}
-{#                <li class="list-group-item">Contract Number: {{ cn }}</li>#}
-{#                <li class="list-group-item">Valid to: {{ valid_to }}</li>#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#    <br>#}
-    {#<form action="{% url 'register verified' cn name valid_to %}" method="post">#}
     <div class="container">
         <label class="col-sm-4 col-form-label">Please, fill the registration form</label>
         <div class="form-group">
             <form class="form-control" method="post" action="{% url 'register user' %}">
-{#            <form class="form-control" method="post">#}
                 {% csrf_token %}
                 {{ form }}
                 <br>
@@ -27,11 +13,6 @@
             </form>
         </div>
     </div>
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ form }}#}
-{#        <button>Register</button>#}
-{#    </form>#}
 
 {% endblock %}
 

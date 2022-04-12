@@ -11,8 +11,6 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>Customer Support</title>
 
-{#    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">#}
-
     <!-- Bootstrap core CSS -->
 {#    <link href="{% static 'dist/css/bootstrap.css/bootstrap.min.css' %}" rel="stylesheet">#}
     <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -52,8 +50,6 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="{% url 'main page' %}" class="nav-link px-2 text-secondary">Home</a></li>
                     {% if request.user.is_authenticated %}
-                        {#                        <li><a href="{% url 'user profile' request.user.pk %}" class="nav-link px-2 text-white">Profile</a></li>#}
-                        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                         {% if user.accountprofile.get_full_name %}
                             <li class="nav-link px-2 text-white">Welcome, {{ user.accountprofile.get_full_name }}</li>
                         {% else %}
@@ -144,7 +140,7 @@
       <li class="nav-item"><a href="{% url 'faq' %}" class="nav-link px-2 text-muted">FAQs</a></li>
       <li class="nav-item"><a href="{% url 'contacts' %}" class="nav-link px-2 text-muted">Contacts</a></li>
     </ul>
-    <p class="text-center text-muted">&copy; 2022 SiraTel Company, Inc</p>
+    <p class="text-center text-muted">&copy; 2022 SigmaTel Company, Inc</p>
   </footer>
 </div>
 </html>

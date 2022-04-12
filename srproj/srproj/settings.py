@@ -14,7 +14,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'hjchjschjdhcj788djhjvjcbvcnbnbc')
 DEBUG = False
 APP_ENV = os.getenv('APP_ENV')
@@ -84,11 +83,6 @@ DATABASES = {
      }
 }
 
-print(APP_ENV)
-print(SECRET_KEY)
-print(DATABASES)
-
-
 if APP_ENV == 'Prod':
     AUTH_PASSWORD_VALIDATORS = [
         {
@@ -117,13 +111,6 @@ TIME_ZONE = 'Europe/Sofia'
 USE_I18N = True
 
 USE_TZ = False
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
