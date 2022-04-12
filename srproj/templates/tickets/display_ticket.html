@@ -6,10 +6,10 @@
 
     <meta http-equiv="refresh" content="30"/>
 
-    <div class="container">
+    <div class="container-fluid">
     <label class="col-sm-4 col-form-label"></label>
 
-    <div class="container text-center list-group-horizontal">
+    <div class="container-fluid text-center list-group-horizontal">
         {% if item.is_active %}
             {% if user|has_group:"Customer" or user|has_group:"Support" or user|has_group:"Supervisor" %}
 
@@ -191,5 +191,5 @@
             </div>
         </div>
     {% endif %}
-
+    </div>
 {% endblock %}
