@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'srproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7885iavjhilgr',
-        'USER': 'hpigsfyoyrdevu',
-        'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
-        'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd4kjl67mnvdd26',
+        'USER': 'vspvksoaqudlgh',
+        'PASSWORD': 'b6de25d422eefb660e458388fa7718bcc350d13b4f43068a0975a415659cb0df',
+        'HOST': 'ec2-34-247-172-149.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
