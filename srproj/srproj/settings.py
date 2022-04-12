@@ -19,11 +19,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 APP_ENV = os.getenv('APP_ENV')
 
-if APP_ENV == 'Prod':
-    ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
-else:
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# if APP_ENV == 'Prod':
+#     ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
+# else:
+#     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+ALLOWED_HOSTS = ['tech-service-request-app.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
@@ -75,26 +76,45 @@ WSGI_APPLICATION = 'srproj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
-print(APP_ENV)
-if APP_ENV == 'Prod':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd7885iavjhilgr',
+        'USER': 'hpigsfyoyrdevu',
+        'PASSWORD': '00b6bc3a507f9fa804c0aa07bf9312065bf0e30bf0745f3d103a497b1d979eb1',
+        'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
-elif APP_ENV == 'Dev':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+# if APP_ENV == 'Prod':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.getenv('DB_NAME'),
+#             'USER': os.getenv('DB_USER'),
+#             'PASSWORD': os.getenv('DB_PASSWORD'),
+#             'HOST': os.getenv('DB_HOST'),
+#             'PORT': os.getenv('DB_PORT', '5432'),
+#         }
+#     }
+# elif APP_ENV == 'Dev':
+#     # DATABASES = {
+#     #     'default': {
+#     #         'ENGINE': 'django.db.backends.postgresql',
+#     #         'NAME': os.getenv('DB_NAME'),
+#     #         'USER': os.getenv('DB_USER'),
+#     #         'PASSWORD': os.getenv('DB_PASSWORD'),
+#     #         'HOST': os.getenv('DB_HOST'),
+#     #         'PORT': os.getenv('DB_PORT'),
+#     #     }
+#     # }
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
 # DATABASES = {
 #     'default': {
@@ -103,7 +123,6 @@ elif APP_ENV == 'Dev':
 #     }
 # }
 
-# print(DATABASES)
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
