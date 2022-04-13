@@ -156,7 +156,7 @@ class TicketListView(CustomLoginRequiredMixin, VerifyPermissionMixin, views.List
     model = Ticket
     template_name = 'tickets/list_tickets.html'
     context_object_name = 'tickets'
-    paginate_by = 3
+    paginate_by = 6
     required_perm = None
     category = None
     active = None
@@ -194,20 +194,3 @@ class TicketResolvedView(TicketListView):
     category = 'Resolved'
     active = False
 
-
-# def resource_not_found(request, exception, template_name='base/404.html'):
-#     """
-#     Custom 404 NotFound page
-#     The status code must be passed on to render, otherwise status code 200 is returned,
-#     which compromises the Unit tests
-#     """
-#     return render(request, template_name, status=404)
-#
-#
-# def forbidden(request, exception, template_name='base/403.html', status_code=403):
-#     """
-#     Custom 403 Forbidden page
-#     The status code must be passed on to render, otherwise status code 200 is returned,
-#     which compromises the Unit tests
-#     """
-#     return render(request, template_name, status=403)

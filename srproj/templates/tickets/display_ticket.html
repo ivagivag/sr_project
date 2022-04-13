@@ -42,7 +42,6 @@
                                                                  alt="Assess"></a>
             {% endif %}
         {% endif %}
-{#        <a href="{% url 'event log' item.pk %}"><img class="img_size" src="{% static 'images/eventlog_48.png' %}"#}
         <a href="{% url 'event log' item.pk %}"><img class="img_size" src="{% static 'images/log.jpg' %}"
                                                      title="Event Log"
                                                      alt="Event Log"></a>
@@ -54,7 +53,6 @@
             <table class="table">
                 <thead>
                 <tr class="table-info">
-{#                    <th scope="col">SR#</th>#}
                     <th scope="col">Summary</th>
                     <th scope="col">Description</th>
                     <th scope="col">Product</th>
@@ -65,7 +63,6 @@
                     {% if not item.is_active %}
                         <th scope="col">Resolved</th>
                     {% endif %}
-                    {#                    <th scope="col">Creator</th>#}
                     <th scope="col">Customer</th>
                     <th scope="col">Assigned to</th>
                     {% if not user|has_group:"Customer" %}
@@ -76,7 +73,6 @@
                 </thead>
                 <tbody>
                 <tr>
-{#                    <td>{{ item.pk }}</td>#}
                     <td>{{ item.summary }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.product }}</td>
@@ -88,7 +84,6 @@
                         <td>{{ item.resolve_date|date:"D, d M Y G:i" }}</td>
                     {% endif %}
                     <td>{{ item.creator }} {{ item.creator.company.name }}</td>
-                    {#                    <td>{{ item.creator.company.name }}</td>#}
                     {% if item.assignee %}
                         <td>{{ item.assignee }}</td>
                     {% else %}
@@ -169,7 +164,6 @@
                 {% endif %}
                 <thead>
                 <tr class="table-warning">
-{#                    <th scope="col"></th>#}
                     <th scope="col">Note</th>
                     <th scope="col">Type</th>
                     <th scope="col">Created</th>
@@ -179,7 +173,6 @@
                 <tbody>
                 {% for entry in entries %}
                     <tr>
-{#                        <th scope="row">{{ forloop.counter }}</th>#}
                         <td>{{ entry.note }}</td>
                         <td>{{ entry.typ }}</td>
                         <td>{{ entry.event_time|date:"D, d M Y G:i" }}</td>

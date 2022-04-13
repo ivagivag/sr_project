@@ -9,7 +9,7 @@ class TicketAssessmentFiltered(CustomLoginRequiredMixin, VerifyPermissionMixin, 
     template_name = 'reports/customer_feedback.html'
     context_object_name = 'assessments'
     required_perm = 'feedback'
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
         """
@@ -45,4 +45,3 @@ class TicketViolatedSla(CustomLoginRequiredMixin, VerifyPermissionMixin, views.L
         queryset = self.model.objects.all()
         queryset = sorted([x for x in queryset if x.delay], key=lambda x: (-x.is_active, -x.delay))
         return queryset
-

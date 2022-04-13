@@ -9,7 +9,6 @@ from srproj.tickets.views.entry_views import EntryCreateView
 from srproj.tickets.views.event_log_view import TicketEventLogView
 
 urlpatterns = [
-    # path('index/', display_main_page, name='main page'),
     path('active', TicketActiveView.as_view(), name='active tickets'),
     path('resolved', TicketResolvedView.as_view(), name='resolved tickets'),
     path('create/', TicketCreateView.as_view(), name='create ticket'),

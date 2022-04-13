@@ -1,5 +1,6 @@
 from django.urls import path, re_path
-from srproj.miscellaneous.views.company_views import CompanyCreateView, CompanyModifyView, CompanyListView, CompanyDisplayView, CompanyActDeactView
+from srproj.miscellaneous.views.company_views import CompanyCreateView, CompanyModifyView, CompanyListView, \
+    CompanyDisplayView, CompanyActDeactView
 
 urlpatterns = [
     path('company/create/', CompanyCreateView.as_view(), name='create company'),

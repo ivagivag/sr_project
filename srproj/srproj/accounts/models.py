@@ -23,7 +23,6 @@ class Company(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-        # return f"{self.name} {self.contract_number} {self.is_active}"
 
     class Meta:
         ordering = ('update_time', 'is_active', 'name', 'contract_number')
@@ -42,8 +41,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     company = models.ForeignKey(
         Company,
         on_delete=models.RESTRICT,
-        # null=True,
-        # blank=True,
     )
 
     objects = AccountManager()

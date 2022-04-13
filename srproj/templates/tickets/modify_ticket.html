@@ -6,7 +6,6 @@
 
         <div class="form-group">
             <form class="form-control" method="post" action="{% url 'modify ticket' object.pk %}">
-{#            <form class="form-control" method="post">#}
                 {% csrf_token %}
                 {{ form }}
                 <br>

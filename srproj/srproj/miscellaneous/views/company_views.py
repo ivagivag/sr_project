@@ -100,7 +100,6 @@ class CompanyActDeactView(CustomLoginRequiredMixin, VerifyPermissionMixin, views
         return super().form_valid(form)
 
     def get_success_url(self):
-        action = self.kwargs['action']
         return reverse_lazy('display company', kwargs={
             'pk': self.object.pk,
         })
