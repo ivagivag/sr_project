@@ -20,7 +20,7 @@ def create_ticket_log(sender, instance, created, **kwargs):
               f"Product: <{instance.product}> Severity: <{instance.severity}> "
               f"State: <{instance.state}> Expected resolve date: <{time_format(instance.resolve_due_date)}> " 
               f"Resolve date: <{time_format(instance.resolve_date)}> " 
-              f"Creator: <{instance.creator}> Assignee: <{instance.assignee}> "
+              f"Creator: <{instance.creator}> Assignee: <{instance.assignee}> Rating: <{instance.rating}>"
               f"Action executed by: <{instance.modifier}> Active: <{instance.is_active}>",
         event_time=datetime.now()
     )
@@ -69,5 +69,6 @@ def create_ticket_log_and_calc_ticket_assessment(sender, instance, created, **kw
     rows_to_calc = [(x.reaction, x.resolve, x.overall) for x in all_assess_rows]
     ticket = Ticket.objects.get(pk=instance.ticket_id)
     result = calc_assess(rows_to_calc)
+    ticket.modifier = instance.creator
     ticket.rating = result
     ticket.save()
