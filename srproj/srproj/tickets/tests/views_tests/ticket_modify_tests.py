@@ -68,7 +68,6 @@ class TicketModifyViewTest(TestCase):
     }
     current_time = datetime.datetime.now()
     reaction_hours = 2
-    customer_group = Group.objects.get(name='Customer')
 
     def setUp(self):
         product_family = ProductFamily.objects.create(**self.product_family_data)

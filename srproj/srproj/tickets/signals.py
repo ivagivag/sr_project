@@ -9,7 +9,7 @@ def time_format(field):
     return field.strftime("%d-%m-%Y, %H:%M") if field else None
 
 
-@receiver(post_save, sender=Ticket)
+@receiver(post_save, sender=Ticket, weak=False)
 def create_ticket_log(sender, instance, created, **kwargs):
     action = "New ticket created" if created else "Modified"
 
@@ -27,7 +27,7 @@ def create_ticket_log(sender, instance, created, **kwargs):
     ticket_log.save()
 
 
-@receiver(post_save, sender=TicketWorkFlow)
+@receiver(post_save, sender=TicketWorkFlow, weak=False)
 def create_ticket_log(sender, instance, created, **kwargs):
     ticket_log = TicketEventLog(
         ticket=instance.ticket,
@@ -53,7 +53,7 @@ def create_ticket_log(sender, instance, created, **kwargs):
 #     ticket_log.save()
 
 
-@receiver(post_save, sender=TicketAssessment)
+@receiver(post_save, sender=TicketAssessment, weak=False)
 def create_ticket_log_and_calc_ticket_assessment(sender, instance, created, **kwargs):
     ticket_log = TicketEventLog(
         ticket=instance.ticket,

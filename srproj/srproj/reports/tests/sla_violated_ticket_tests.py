@@ -27,12 +27,12 @@ class TicketSlaViolatedViewTest(TestCase):
     company_customer_data = {
         'name': 'ChinaTel',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '222',
+        'contract_number': '222222',
     }
     company_internal_data = {
         'name': 'internal',
         'valid_to': datetime.datetime(2055, 1, 17),
-        'contract_number': '000',
+        'contract_number': '000000',
     }
     user_customer1_data = {
         'email': 'z@x.com',
@@ -59,7 +59,6 @@ class TicketSlaViolatedViewTest(TestCase):
     }
     current_time = datetime.datetime.now()
     reaction_hours = 2
-    customer_group = Group.objects.get(name='Customer')
 
     def setUp(self):
         product_family = ProductFamily.objects.create(**self.product_family_data)

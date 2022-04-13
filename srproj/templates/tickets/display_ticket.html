@@ -54,7 +54,7 @@
             <table class="table">
                 <thead>
                 <tr class="table-info">
-                    <th scope="col">SR#</th>
+{#                    <th scope="col">SR#</th>#}
                     <th scope="col">Summary</th>
                     <th scope="col">Description</th>
                     <th scope="col">Product</th>
@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{ item.pk }}</td>
+{#                    <td>{{ item.pk }}</td>#}
                     <td>{{ item.summary }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.product }}</td>
@@ -169,7 +169,7 @@
                 {% endif %}
                 <thead>
                 <tr class="table-warning">
-                    <th scope="col"></th>
+{#                    <th scope="col"></th>#}
                     <th scope="col">Note</th>
                     <th scope="col">Type</th>
                     <th scope="col">Created</th>
@@ -179,7 +179,7 @@
                 <tbody>
                 {% for entry in entries %}
                     <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
+{#                        <th scope="row">{{ forloop.counter }}</th>#}
                         <td>{{ entry.note }}</td>
                         <td>{{ entry.typ }}</td>
                         <td>{{ entry.event_time|date:"D, d M Y G:i" }}</td>
